@@ -14,7 +14,7 @@ export default class Todo extends Component {
         id: 2,
         value: 'Get coffee',
         done: true}],
-      input:''}
+      input:'', showDone: false}
   }
 
   addToList = (event) => {
@@ -40,6 +40,10 @@ export default class Todo extends Component {
     })
   }
 
+  toggleDone = (event) => {
+    this.setState({showDone: !!!this.state.showDone})
+  }
+
   render() {
     return (
         <div>
@@ -47,8 +51,11 @@ export default class Todo extends Component {
           <form> 
             <input value={this.state.input} onChange={this.storeInput}/>
             <button onClick={this.addToList}>Submit</button>
+            <br/>
+            <input type="checkbox" value={this.state.showDone} onClick={this.toggleDone}/>
+            <label>Show Completed Items</label>
             {
-              this.state.list.map((item) => {
+              this.state.list.filter((item) => this.state.showDone? item : item.done === false).map((item) => {
                 return (
                   <h3 key={item.id} onClick={() => this.changeDone(item.id)} style={ item.done ? { textDecorationLine: 'line-through' } : {}}>
                     { item.done ? 'Done-' + item.value: item.value }
