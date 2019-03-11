@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-import Todo from './Todo';
+import Render from './TodoRedux';
 
 class App extends Component {
   render() {
     return (
-      <Todo/>
+      <Render/>
     );
   }
 }
